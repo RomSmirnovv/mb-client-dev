@@ -1,0 +1,89 @@
+table.table-estimate th {
+	vertical-align: middle;
+}
+
+table.default-table td span,
+table.default-table td b {
+	display: inline-block;
+	min-width: 20px;
+	min-height: 1em;
+	cursor: pointer;
+}
+
+.field-group {
+	position: relative;
+}
+
+.field-group input,
+.field-group textarea {
+	min-width: 150px;
+	padding-right: 60px;
+}
+
+.field-group textarea {
+	height: 100%;
+	resize: vertical;
+	overflow: visible;
+}
+
+.field-buttons {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+}
+
+.field-buttons svg {
+	cursor: pointer;
+	margin: 3px;
+}
+
+.name-row {
+	position: relative;
+}
+
+.name-row>svg {
+	opacity: 0.2;
+	width: 1.2rem;
+	height: 1.2rem;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+
+.name-row>svg.other-work-icon {
+	right: 40px;
+	color: #777777;
+}
+
+.name-row>svg.fill-other-work-icon {
+	opacity: 0.8;
+	color: #52c838;
+}
+
+.title-name-row>svg {
+	top: 35px;
+}
+
+.name-row:hover>svg {
+	opacity: 1;
+}
+
+.delete-field>svg {
+	opacity: 0.2;
+	width: 1.2rem;
+	height: 1.2rem;
+	cursor: pointer;
+}
+
+.delete-field:hover>svg {
+	opacity: 1;
+}
+
+tr.tfoot-price th {
+	word-wrap: break-word
+}
+
+tr.table-technic td {
+	background-color: #c5efff;
+}
