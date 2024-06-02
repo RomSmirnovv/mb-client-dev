@@ -1,137 +1,137 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { Circle } from "react-preloaders";
-import inMemoryJWT from "../services/inMemoryJWT";
-import config from "../config";
+// import inMemoryJWT from "../services/inMemoryJWT";
+// import config from "../config";
 import showErrorMessage from "../utils/showErrorMessage";
-import { useNavigate } from 'react-router-dom';
-import { DASHBOARD_ROUTE } from '../utils/consts.js';
-import ProjectStore from "../store/ProjectStore.js"
+import { useNavigate } from "react-router-dom";
+import { DASHBOARD_ROUTE } from "../utils/consts.js";
+import ProjectStore from "../store/ProjectStore.js";
 
 export const AuthClient = axios.create({
-	baseURL: `${config.API_URL}/auth`,
-	withCredentials: true,
+  // baseURL: `${config.API_URL}/auth`,
+  withCredentials: true,
 });
 export const ResourceClient = axios.create({
-	baseURL: `${config.API_URL}/resource`,
+  // baseURL: `${config.API_URL}/resource`,
 });
 
 ResourceClient.interceptors.request.use(
-	(config) => {
-		const accessToken = inMemoryJWT.getToken();
+  (config) => {
+    // const accessToken = inMemoryJWT.getToken();
 
-		if (accessToken) {
-			config.headers["Authorization"] = `Bearer ${accessToken}`;
-		}
+    // if (accessToken) {
+    //   config.headers["Authorization"] = `Bearer ${accessToken}`;
+    // }
 
-		return config;
-	},
-	(error) => {
-		Promise.reject(error);
-	}
+    return config;
+  },
+  (error) => {
+    Promise.reject(error);
+  }
 );
 
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-	const [isAppReady, setIsAppReady] = useState(true);
-	const [data, setData] = useState();
-	const navigate = useNavigate()
+  const [isAppReady, setIsAppReady] = useState(true);
+  const [data, setData] = useState();
+  const navigate = useNavigate();
 
-	// const handleFetchProtected = () => {
-	// 	ResourceClient.get("/protected")
-	// 		.then((res) => {
-	// 			setData(res.data);
-	// 		})
-	// 		.catch(showErrorMessage);
-	// };
+  // const handleFetchProtected = () => {
+  // 	ResourceClient.get("/protected")
+  // 		.then((res) => {
+  // 			setData(res.data);
+  // 		})
+  // 		.catch(showErrorMessage);
+  // };
 
-	// const handleLogOut = () => {
-	// 	AuthClient.post("/logout")
-	// 		.then(() => {
-	// 			setIsUserLogged(false);
-	// 			inMemoryJWT.deleteToken();
+  // const handleLogOut = () => {
+  // 	AuthClient.post("/logout")
+  // 		.then(() => {
+  // 			setIsUserLogged(false);
+  // 			inMemoryJWT.deleteToken();
 
-	// 			setData();
-	// 		})
-	// 		.catch(showErrorMessage);
-	// };
+  // 			setData();
+  // 		})
+  // 		.catch(showErrorMessage);
+  // };
 
-	// const handleSignUp = (data) => {
-	// 	AuthClient.post("/sign-up", data)
-	// 		.then((res) => {
-	// 			const { accessToken, accessTokenExpiration } = res.data;
+  // const handleSignUp = (data) => {
+  // 	AuthClient.post("/sign-up", data)
+  // 		.then((res) => {
+  // 			const { accessToken, accessTokenExpiration } = res.data;
 
-	// 			inMemoryJWT.setToken(accessToken, accessTokenExpiration);
-	// 			setIsUserLogged(true);
-	// 		})
-	// 		.catch(showErrorMessage);
-	// };
+  // 			inMemoryJWT.setToken(accessToken, accessTokenExpiration);
+  // 			setIsUserLogged(true);
+  // 		})
+  // 		.catch(showErrorMessage);
+  // };
 
-	// const handleSignIn = (data) => {
-	// 	AuthClient.post("/sign-in", data)
-	// 		.then((res) => {
-	// 			const { accessToken, accessTokenExpiration } = res.data;
+  // const handleSignIn = (data) => {
+  // 	AuthClient.post("/sign-in", data)
+  // 		.then((res) => {
+  // 			const { accessToken, accessTokenExpiration } = res.data;
 
-	// 			inMemoryJWT.setToken(accessToken, accessTokenExpiration);
-	// 			setIsUserLogged(true);
-	// 			navigate(DASHBOARD_ROUTE, { replace: true })
-	// 		})
-	// 		.catch(showErrorMessage);
-	// };
+  // 			inMemoryJWT.setToken(accessToken, accessTokenExpiration);
+  // 			setIsUserLogged(true);
+  // 			navigate(DASHBOARD_ROUTE, { replace: true })
+  // 		})
+  // 		.catch(showErrorMessage);
+  // };
 
-	// useEffect(() => {
-	// 	AuthClient.post("/refresh")
-	// 		.then((res) => {
-	// 			const { accessToken, accessTokenExpiration } = res.data;
-	// 			inMemoryJWT.setToken(accessToken, accessTokenExpiration);
+  // useEffect(() => {
+  // 	AuthClient.post("/refresh")
+  // 		.then((res) => {
+  // 			const { accessToken, accessTokenExpiration } = res.data;
+  // 			inMemoryJWT.setToken(accessToken, accessTokenExpiration);
 
-	// 			setIsAppReady(true);
-	// 			setIsUserLogged(true);
-	// 		})
-	// 		.catch(() => {
-	// 			setIsAppReady(true);
-	// 			setIsUserLogged(false);
-	// 		});
-	// }, []);
+  // 			setIsAppReady(true);
+  // 			setIsUserLogged(true);
+  // 		})
+  // 		.catch(() => {
+  // 			setIsAppReady(true);
+  // 			setIsUserLogged(false);
+  // 		});
+  // }, []);
 
-	// useEffect(() => {
-	// 	const handlePersistedLogOut = (event) => {
-	// 		if (event.key === config.LOGOUT_STORAGE_KEY) {
-	// 			inMemoryJWT.deleteToken();
-	// 			setIsUserLogged(false);
-	// 		}
-	// 	};
+  // useEffect(() => {
+  // 	const handlePersistedLogOut = (event) => {
+  // 		if (event.key === config.LOGOUT_STORAGE_KEY) {
+  // 			inMemoryJWT.deleteToken();
+  // 			setIsUserLogged(false);
+  // 		}
+  // 	};
 
-	// 	window.addEventListener("storage", handlePersistedLogOut);
+  // 	window.addEventListener("storage", handlePersistedLogOut);
 
-	// 	return () => {
-	// 		window.removeEventListener("storage", handlePersistedLogOut);
-	// 	};
-	// }, []);
+  // 	return () => {
+  // 		window.removeEventListener("storage", handlePersistedLogOut);
+  // 	};
+  // }, []);
 
-	return (
-		<AuthContext.Provider
-			value={{
-				data,
-				// handleFetchProtected,
-				// handleSignUp,
-				// handleSignIn,
-				// handleLogOut,
-				// isAppReady,
-				// isUserLogged,
-				// project: new ProjectStore(),
-			}}
-		>
-			{isAppReady ? (
-				children
-			) : (
-				<div>
-					<Circle />
-				</div>
-			)}
-		</AuthContext.Provider>
-	);
+  return (
+    <AuthContext.Provider
+      value={{
+        data,
+        // handleFetchProtected,
+        // handleSignUp,
+        // handleSignIn,
+        // handleLogOut,
+        // isAppReady,
+        // isUserLogged,
+        // project: new ProjectStore(),
+      }}
+    >
+      {isAppReady ? (
+        children
+      ) : (
+        <div>
+          <Circle />
+        </div>
+      )}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
