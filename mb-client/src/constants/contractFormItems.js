@@ -16,10 +16,19 @@ export const contractInitials = {
 };
 
 export const contractFormItems = [
-  { name: "contract_number", label: "Номер договора" },
-  { name: "city", label: "Город" },
-  { name: "date", label: "Дата" },
-  { name: "contract_header", label: "Шапка договора", type: "textarea" },
+  {
+    name: "contract_number",
+    label: "Номер договора",
+    className: "contract__number",
+  },
+  { name: "city", label: "Город", className: "city" },
+  { name: "date", label: "Дата", className: "date" },
+  {
+    name: "contract_header",
+    label: "Шапка договора",
+    type: "textarea",
+    className: "contract__header",
+  },
   {
     name: "object",
     label: "Объект/Объекты",
@@ -47,16 +56,18 @@ export const contractFormItems = [
   {
     name: "org_name",
     label: "Название организации (ФИО для физ лица) исполнителя",
+    className: "org__full",
   },
   {
     name: "org_name_short",
     label:
       "Сокращенное название организации (Фамилия, инициалы для физ лица) исполнителя",
+    className: "org__short",
   },
   {
     name: "requisites",
     label: "Реквизиты исполнителя",
     type: "textarea",
-    style: { width: 300, height: 200 },
+    className: "requisites",
   },
 ];

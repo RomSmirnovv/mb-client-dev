@@ -23,32 +23,6 @@ const FORM_STYLES_FOR_LABEL = {
   wrapperCol: { span: 24 },
 };
 
-const formItems = [
-  { name: "contract_number", label: "Номер договора" },
-  { name: "city", label: "Город" },
-  { name: "date", label: "Дата" },
-  { name: "contract_header", label: "Шапка договора", type: "textarea" },
-  { name: "object", label: "Объект/Объекты", type: "textarea" },
-  { name: "terms", label: "Срок выполнения", type: "textarea" },
-  { name: "price", label: "Стоимость работ", type: "textarea" },
-  { name: "prepaid_amount", label: "Аванс по договору", type: "textarea" },
-  {
-    name: "org_name",
-    label: "Название организации (ФИО для физ лица) исполнителя",
-  },
-  {
-    name: "org_name_short",
-    label:
-      "Сокращенное название организации (Фамилия, инициалы для физ лица) исполнителя",
-  },
-  {
-    name: "requisites",
-    label: "Реквизиты исполнителя",
-    type: "textarea",
-    style: { width: 300, height: 200 },
-  },
-];
-
 export const ContractForm = ({ contractName }) => {
   const [isContractFormed, setIsContractFormed] = useState(false);
   const [generatedDoc, setGeneratedDoc] = useState(null);
@@ -59,6 +33,7 @@ export const ContractForm = ({ contractName }) => {
     validationSchema: contractValidationSchema,
     onSubmit: (values) => {
       generateDocument(values);
+      // отсюда если что можно будет сохранить текущие заполненные данные, которые представлены в виде объекта {"название поля": "значение"}
     },
   });
 
@@ -119,58 +94,66 @@ export const ContractForm = ({ contractName }) => {
         </Typography.Text>
         <Form
           onFinish={formik.handleSubmit}
-          size="large"
           style={{ width: "100%" }}
           form={form}
         >
-          <Form.Item
-            name="contract_type"
-            label="Тип договора"
-            validateStatus={validateStatus("contract_type")}
-            help={helpText("contract_type")}
-            {...FORM_STYLES_FOR_LABEL}
-          >
-            <Select
-              defaultValue={contractTypes[0].value}
-              onChange={handleChange}
-              options={contractTypes.map(({ value }) => ({
-                label: value,
-                value,
-              }))}
-            />
-          </Form.Item>
-          {contractFormItems.map(({ name, label, type, style, className }) => (
+          <div className="parent">
             <Form.Item
-              key={name}
-              name={name}
-              label={label}
-              validateStatus={validateStatus(name)}
-              help={helpText(name)}
+              name="contract_type"
+              label="Тип договора"
+              validateStatus={validateStatus("contract_type")}
+              help={helpText("contract_type")}
+              className="contract__type"
               {...FORM_STYLES_FOR_LABEL}
-              style={style}
-              className={className}
             >
-              {type === "textarea" ? (
-                <Input.TextArea
-                  name={name}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values[name]}
-                />
-              ) : (
-                <Input
-                  name={name}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values[name]}
-                />
-              )}
+              <Select
+                defaultValue={contractTypes[0].value}
+                onChange={handleChange}
+                style={{ width: "100%" }}
+                options={contractTypes.map(({ value }) => ({
+                  label: value,
+                  value,
+                }))}
+              />
             </Form.Item>
-          ))}
+            {contractFormItems.map(
+              ({ name, label, type, style, className }) => (
+                <Form.Item
+                  key={name}
+                  name={name}
+                  label={label}
+                  validateStatus={validateStatus(name)}
+                  help={helpText(name)}
+                  {...FORM_STYLES_FOR_LABEL}
+                  style={style}
+                  className={className}
+                >
+                  {type === "textarea" ? (
+                    <Input.TextArea
+                      name={name}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values[name]}
+                      style={{ resize: "none", height: "inherit" }}
+                    />
+                  ) : (
+                    <Input
+                      name={name}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values[name]}
+                      style={{ height: "inherit" }}
+                    />
+                  )}
+                </Form.Item>
+              )
+            )}
+          </div>
           <Form.Item>
             <Button
               htmlType="submit"
               type="primary"
+              className="submit__button"
               onClick={isContractFormed ? handleDownload : undefined}
               disabled={
                 isContractFormed
