@@ -104,10 +104,10 @@ export const ContractForm = ({ contractName }) => {
               validateStatus={validateStatus("contract_type")}
               help={helpText("contract_type")}
               className="contract__type"
+              initialValue={contractInitials.contract_type}
               {...FORM_STYLES_FOR_LABEL}
             >
               <Select
-                defaultValue={contractTypes[0].value}
                 onChange={handleChange}
                 style={{ width: "100%" }}
                 options={contractTypes.map(({ value }) => ({
@@ -117,7 +117,7 @@ export const ContractForm = ({ contractName }) => {
               />
             </Form.Item>
             {contractFormItems.map(
-              ({ name, label, type, style, className }) => (
+              ({ name, label, type, style, className, textAreaClassName }) => (
                 <Form.Item
                   key={name}
                   name={name}
@@ -126,6 +126,7 @@ export const ContractForm = ({ contractName }) => {
                   help={helpText(name)}
                   {...FORM_STYLES_FOR_LABEL}
                   style={style}
+                  initialValue={contractInitials[name]}
                   className={className}
                 >
                   {type === "textarea" ? (
@@ -134,7 +135,7 @@ export const ContractForm = ({ contractName }) => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values[name]}
-                      style={{ resize: "none", height: "inherit" }}
+                      className={textAreaClassName}
                     />
                   ) : (
                     <Input

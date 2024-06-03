@@ -24,6 +24,13 @@
 }
 .contract__header {
   grid-area: 1 / 5 / 3 / 9;
+  resize: "vertical";
+  max-height: 200px;
+  min-height: 150px;
+}
+.contract__header .contract__header_textarea {
+  max-height: 250px;
+  min-height: 150px;
 }
 .object {
   grid-area: 4 / 1 / 5 / 5;
@@ -37,6 +44,21 @@
 .prepaid {
   grid-area: 5 / 5 / 6 / 9;
 }
+.object,
+.terms,
+.amount,
+.prepaid {
+  resize: "vertical";
+  max-height: 150px;
+  min-height: 100px;
+}
+.object textarea,
+.terms textarea,
+.amount textarea,
+.prepaid textarea {
+  max-height: 80px;
+  min-height: 50px;
+}
 .org__full {
   grid-area: 6 / 1 / 7 / 5;
 }
@@ -45,6 +67,10 @@
 }
 .requisites {
   grid-area: 6 / 5 / 8 / 9;
+}
+.requisites textarea {
+  max-height: 150px;
+  min-height: 80px;
 }
 
 .submit__button {
