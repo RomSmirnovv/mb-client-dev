@@ -1,0 +1,16 @@
+.wrapper {
+  background-color: white;
+  padding: 40px 20px;
+}
+.text {
+  font-weight: 500;
+}
+.textarea {
+  resize: none;
+}
+.terms,
+.amount,
+.prepaid,
+.object {
+  flex: 0 1 47.5%;
+}
